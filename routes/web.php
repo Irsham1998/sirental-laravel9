@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\OtentikasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+// route auth
+Route::middleware(['guest'])->group(function () {
+    Route::get('/', [OtentikasiController::class, 'login'])->name('login');
+    Route::post('/', [OtentikasiController::class, 'loginProcess'])->name('login-proses');
+    Route::get('/register', [OtentikasiController::class, 'register'])->name('register');
+    Route::post('/register', [OtentikasiController::class, 'registerProcess'])->name('register-proses');
 });
+
+Route::post('/logout', [OtentikasiController::class, 'logout'])->name('logout-proses')->middleware('auth');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'admin']);
+
+Route::get('/profile', function () {
+    return view('profile');
+})->middleware(['auth','client']);
