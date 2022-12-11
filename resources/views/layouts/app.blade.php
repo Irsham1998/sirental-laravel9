@@ -55,16 +55,16 @@
             @if (Auth::user()->role_id == 1)
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../pages/dashboard.html">
+                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Dashboard</span>
+                            <span class="nav-link-text ms-1 ">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="../pages/tables.html">
+                        <a class="nav-link {{ request()->is('books') ? 'active' : '' }}" href="/books">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="../pages/billing.html">
+                        <a class="nav-link {{ request()->is('categories') ? 'active' : '' }}" href="categories">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-app text-info text-sm opacity-10"></i>
@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="../pages/virtual-reality.html">
+                        <a class="nav-link {{ request()->is('users') ? 'active' : '' }}" href="/users">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -91,7 +91,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="../pages/rtl.html">
+                        <a class="nav-link {{ request()->is('rent-logs') ? 'active' : '' }}" href="/rent-logs">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Lainnya</h6>
                     </li>
                     <li class="nav-item">
                         <form action="/logout" method="post">
@@ -118,7 +118,7 @@
             @else
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../pages/tables.html">
+                        <a class="nav-link {{ request()->is('profile') ? 'active' : '' }}" href="/profile">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -127,7 +127,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../pages/tables.html">
+                        <a class="nav-link {{ request()->is('books') ? 'active' : '' }}" href="/books">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Lainnya</h6>
                     </li>
                     <li class="nav-item">
                         <form action="/logout" method="post">
