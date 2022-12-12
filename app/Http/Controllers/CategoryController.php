@@ -63,6 +63,14 @@ class CategoryController extends Controller
     // delete
     public function destroy(Request $request, $slug)
     {
-        # code...
+        $deletedDelete = Category::where('slug', $slug)->first();
+        $deletedDelete->delete();
+
+        if ($deletedDelete) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Genre berhasil dihapus');
+        }
+
+        return redirect('/categories');
     }
 }

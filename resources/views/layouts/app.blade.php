@@ -199,7 +199,7 @@
             @yield('content')
 
             {{-- content --}}
-            <footer class="footer pt-3 mb-4 mt-4  ">
+            <footer class="footer pt-3 mb-4 mt-5  ">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-12 mb-lg-0 mb-4">
@@ -393,6 +393,9 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    {{-- scripts --}}
+    @yield('scripts')
+    {{-- scripts --}}
 </body>
 
 </html>

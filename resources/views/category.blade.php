@@ -1,5 +1,5 @@
 @extends('layouts\app')
-@section('title', 'Dashboard')
+@section('title', 'Categories')
 
 @section('content')
     <div class="row">
@@ -38,24 +38,24 @@
                             </div>
                         </div>
                     @endif
-                    <div class="row">
+                    <div class="container">
+                        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
                         <form action="/categories-add" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="d-flex">
-                                <div class="p-2 col-8">
-                                    <div class="mb-2">
-                                        <input type="text" class="form-control form-control-md" placeholder="Genre"
-                                            aria-label="Genre" name="name" id="name" required>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-8 p-2">
+                                    <input type="text" class="form-control form-control-md" placeholder="Genre"
+                                        aria-label="Genre" name="name" id="name" required>
                                 </div>
-                                <div class="p-2 flex-shrink-1 col-4 text-end">
-                                    <button class="btn btn-primary btn-md mb-0" href="#" type="submit">
+                                <div class="d-grid col-12 col-md-4 p-2">
+                                    <button class="btn btn-primary btn-md btn-block mb-0 " type="submit">
                                         Add new genre
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    {{-- test --}}
                 </div>
             </div>
         </div>
@@ -104,15 +104,26 @@
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a class="btn btn-link text-dark text-gradient px-3 mb-0 dropdown-item"
-                                                            href="#"><i class="fas fa-pencil-alt text-dark me-2"></i>
+                                                            href="/categories-edit/{{ $item->slug }}"><i
+                                                                class="fas fa-pencil-alt text-dark me-2"></i>
                                                             Edit
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                            href="#"><i class="far fa-trash-alt me-2"></i>
+                                                        {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
+                                                            href="/categories-delete/{{ $item->slug }}"><i
+                                                                class="far fa-trash-alt me-2"></i>
                                                             Delete
-                                                        </a>
+                                                        </a> --}}
+                                                        <form action="/categories-delete/{{ $item->slug }}" method="POST"
+                                                            class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button
+                                                                class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
+                                                                onclick="return confirm('Apakah anda yakin menghapus {{ $item->name }} ?')"><i
+                                                                    class="far fa-trash-alt me-2"></i>Delete</button>
+                                                        </form>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -121,7 +132,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
