@@ -43,7 +43,10 @@ Route::middleware(['auth'])->group(function () {
 
     // admin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories')->middleware('admin');
+    Route::post('/categories-add', [CategoryController::class, 'store'])->name('categories-add')->middleware('admin');
+
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('admin');
     Route::get('/rent-logs', [RentlogController::class, 'index'])->name('rent-logs')->middleware('admin');
 
