@@ -1,5 +1,5 @@
 @extends('layouts\app')
-@section('title', 'Dashboard')
+@section('title', 'Books')
 
 @section('content')
     <div class="row">
@@ -11,22 +11,138 @@
             <h6 class="font-weight-bolder text-white mb-0">Books</h6>
         </nav>
     </div>
-    <div class="row py-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-            <div class="card z-index-2 h-100">
-                <div class="card-header pb-0 pt-3 bg-transparent">
-                    <h6 class="text-capitalize">Sales overview</h6>
-                    <p class="text-sm mb-0">
-                        <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4% more</span> in 2021
-                    </p>
+    {{-- table --}}
+    <div class="row pt-2">
+        <div class="col-12">
+            <div class="card mb-4 mt-3">
+                <div class="card-header pb-0">
+                    {{-- notif --}}
+                    @if (Session::has('status'))
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="alert alert-success mt-2 w-100 text-center font-weight-bolder text-light"
+                                    role="alert">
+                                    {{ Session::get('message') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                @foreach ($errors->all() as $error)
+                                    <div
+                                        class="alert alert-danger w-100  align-middle text-center font-weight-bolder text-light">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    {{-- notif --}}
+                    <div class="container">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-8 p-2">
+                                    <h4>Books List</h4>
+                                </div>
+                                <div class="d-grid col-12 col-md-4 p-2">
+                                    <a class="btn btn-primary btn-md btn-block mb-0 justify-content-end" href="/books-add">
+                                        Add new book
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body p-3">
-                    <div class="chart">
-                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                <div class="card-body px-0 pt-0 pb-2 mt-4">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 text-center">
+                                        #
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        Kode
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        Title
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        Status
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($books as $item)
+                                    <tr>
+                                        <td>
+                                            <p class="text-sm font-weight-bold mb-0 text-center">
+                                                {{ $loop->iteration }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-sm font-weight-bold mb-0 text-left">
+                                                {{ $item->book_code }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-sm font-weight-bold mb-0 text-left">
+                                                {{ $item->title }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-sm font-weight-bold mb-0 text-left">
+                                                {{ $item->status }}
+                                            </p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="dropdown">
+                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true"
+                                                    aria-expanded="false" data-bs-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v text-xs"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="btn btn-link text-dark text-gradient px-3 mb-0 dropdown-item"
+                                                            href="#"><i class="fas fa-pencil-alt text-dark me-2"></i>
+                                                            Edit
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
+                                                            href="#">
+                                                            <i class="far fa-trash-alt me-2"></i>Delete
+                                                        </a>
+                                                        {{-- <form action="#" method="POST" class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button
+                                                                class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
+                                                                onclick="return confirm('Apakah anda yakin menghapus # ?')"><i
+                                                                    class="far fa-trash-alt me-2"></i>Delete</button>
+                                                        </form> --}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            No have book data
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {{-- table --}}
 @endsection
