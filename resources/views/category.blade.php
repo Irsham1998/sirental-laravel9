@@ -110,19 +110,16 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                            href="/categories-delete/{{ $item->slug }}"><i
-                                                                class="far fa-trash-alt me-2"></i>
-                                                            Delete
-                                                        </a> --}}
                                                         <form action="/categories-delete/{{ $item->slug }}" method="POST"
                                                             class="d-inline">
                                                             @method('delete')
                                                             @csrf
                                                             <button
                                                                 class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                                onclick="return confirm('Apakah anda yakin menghapus {{ $item->name }} ?')"><i
-                                                                    class="far fa-trash-alt me-2"></i>Delete</button>
+                                                                onclick="return confirm('Apakah anda yakin menghapus {{ $item->name }} ?')">
+                                                                <i class="far fa-trash-alt me-2"></i>
+                                                                Delete
+                                                            </button>
                                                         </form>
                                                     </li>
                                                 </ul>

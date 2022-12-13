@@ -71,6 +71,9 @@
                                         Title
                                     </th>
                                     <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        Category
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                         Status
                                     </th>
                                     <th></th>
@@ -95,6 +98,15 @@
                                             </p>
                                         </td>
                                         <td>
+                                            @foreach ($item->categories as $category)
+                                                <p class="align-middle text-xs text-left">
+                                                    <span class="badge badge-sm bg-gradient-success">
+                                                        {{ $category->name }}
+                                                    </span>
+                                                </p>
+                                            @endforeach
+                                        </td>
+                                        <td>
                                             <p class="text-sm font-weight-bold mb-0 text-left">
                                                 {{ $item->status }}
                                             </p>
@@ -108,23 +120,23 @@
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a class="btn btn-link text-dark text-gradient px-3 mb-0 dropdown-item"
-                                                            href="#"><i class="fas fa-pencil-alt text-dark me-2"></i>
+                                                            href="/books-edit/{{ $item->slug }}"><i
+                                                                class="fas fa-pencil-alt text-dark me-2"></i>
                                                             Edit
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                            href="#">
-                                                            <i class="far fa-trash-alt me-2"></i>Delete
-                                                        </a>
-                                                        {{-- <form action="#" method="POST" class="d-inline">
+                                                        <form action="/books-delete/{{ $item->slug }}" method="POST"
+                                                            class="d-inline">
                                                             @method('delete')
                                                             @csrf
                                                             <button
                                                                 class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                                onclick="return confirm('Apakah anda yakin menghapus # ?')"><i
-                                                                    class="far fa-trash-alt me-2"></i>Delete</button>
-                                                        </form> --}}
+                                                                onclick="return confirm('Apakah anda yakin menghapus {{ $item->title }} ?')">
+                                                                <i class="far fa-trash-alt me-2"></i>
+                                                                Delete
+                                                            </button>
+                                                        </form>
                                                     </li>
                                                 </ul>
                                             </div>

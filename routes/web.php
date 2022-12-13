@@ -48,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/books', [BookController::class, 'index'])->name('books')->middleware('admin');
     Route::get('/books-add', [BookController::class, 'create'])->name('books-add')->middleware('admin');
     Route::post('/books-add', [BookController::class, 'store'])->name('books-store')->middleware('admin');
+    Route::get('/books-edit/{slug}', [BookController::class, 'edit'])->name('books-edit')->middleware('admin');
+    Route::put('/books-edit/{slug}', [BookController::class, 'update'])->name('books-update')->middleware('admin');
+    Route::delete('/books-delete/{slug}', [BookController::class, 'destroy'])->name('books-delete')->middleware('admin');
 
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('admin');
     Route::get('/rent-logs', [RentlogController::class, 'index'])->name('rent-logs')->middleware('admin');
