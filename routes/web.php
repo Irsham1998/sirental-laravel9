@@ -52,7 +52,15 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/books-edit/{slug}', [BookController::class, 'update'])->name('books-update')->middleware('admin');
     Route::delete('/books-delete/{slug}', [BookController::class, 'destroy'])->name('books-delete')->middleware('admin');
 
+    // admin users
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('admin');
+    Route::get('/users-newregister', [UserController::class, 'newregsiter'])->name('users-newregister')->middleware('admin');
+    Route::put('/users-approved/{email}', [UserController::class, 'approved'])->name('users-approved')->middleware('admin');
+    Route::delete('/users-banned/{email}', [UserController::class, 'banned'])->name('users-banned')->middleware('admin');
+    Route::get('/users-bannedlist', [UserController::class, 'bannedlist'])->name('users-bannedlist')->middleware('admin');
+    Route::get('/users-restore/{email}', [UserController::class, 'restore'])->name('users-restore')->middleware('admin');
+
+    // admin rent logs
     Route::get('/rent-logs', [RentlogController::class, 'index'])->name('rent-logs')->middleware('admin');
 
     // client

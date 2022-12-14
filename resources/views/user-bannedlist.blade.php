@@ -6,9 +6,9 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                <li class="breadcrumb-item text-sm text-white active" aria-current="page">Users</li>
+                <li class="breadcrumb-item text-sm text-white active" aria-current="page">Users Banned</li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0">Users</h6>
+            <h6 class="font-weight-bolder text-white mb-0">Users Banned</h6>
         </nav>
     </div>
     {{-- table --}}
@@ -44,17 +44,12 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-md-8 p-2">
-                                    <h4>Users List</h4>
+                                    <h4>Users Banned List</h4>
                                 </div>
-                                <div class="d-grid col-12 col-md-4 p-2 dropdown">
-                                    <a class="btn btn-primary btn-md btn-block mb-0 justify-content-end dropdown-toggle"
-                                        href="/books-add" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Other action
+                                <div class="d-grid col-12 col-md-4 p-2">
+                                    <a href="/users" class="btn btn-success btn-md btn-block mb-0 " type="">
+                                        User active
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/users-bannedlist">Banned user</a></li>
-                                        <li><a class="dropdown-item" href="/users-newregister">New user register</a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($userList as $item)
+                                @forelse ($bannedList as $item)
                                     <tr>
                                         <td>
                                             <p class="text-sm font-weight-bold mb-0 text-center">
@@ -133,7 +128,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <form action="/users-banned/{{ $item->email }}" method="POST"
+                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
+                                                href="/users-restore/{{ $item->email }}"><i
+                                                    class="fas fa-pencil-alt text-dark me-2"></i>
+                                                Unbanned
+                                            </a>
+                                            {{-- <form action="/users-banned/{{ $item->email }}" method="POST"
                                                 class="d-inline">
                                                 @method('delete')
                                                 @csrf
@@ -143,12 +143,12 @@
                                                     <i class="far fa-trash-alt me-2"></i>
                                                     Banned
                                                 </button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">
+                                        <td colspan="7" class="text-center">
                                             No have users data
                                         </td>
                                     </tr>

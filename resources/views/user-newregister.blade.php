@@ -1,14 +1,14 @@
 @extends('layouts\app')
-@section('title', 'Users')
+@section('title', 'User Register')
 
 @section('content')
     <div class="row">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                <li class="breadcrumb-item text-sm text-white active" aria-current="page">Users</li>
+                <li class="breadcrumb-item text-sm text-white active" aria-current="page">New user registered</li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0">Users</h6>
+            <h6 class="font-weight-bolder text-white mb-0">New user registered</h6>
         </nav>
     </div>
     {{-- table --}}
@@ -46,15 +46,10 @@
                                 <div class="col-md-8 p-2">
                                     <h4>Users List</h4>
                                 </div>
-                                <div class="d-grid col-12 col-md-4 p-2 dropdown">
-                                    <a class="btn btn-primary btn-md btn-block mb-0 justify-content-end dropdown-toggle"
-                                        href="/books-add" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Other action
+                                <div class="d-grid col-12 col-md-4 p-2">
+                                    <a href="/users" class="btn btn-success btn-md btn-block mb-0 " type="">
+                                        User active
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/users-bannedlist">Banned user</a></li>
-                                        <li><a class="dropdown-item" href="/users-newregister">New user register</a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -70,16 +65,7 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
-                                        Nama
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                         Email
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
-                                        Phone
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
-                                        Address
                                     </th>
                                     <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                         Status
@@ -88,7 +74,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($userList as $item)
+                                @forelse ($userRegisList as $item)
                                     <tr>
                                         <td>
                                             <p class="text-sm font-weight-bold mb-0 text-center">
@@ -97,28 +83,7 @@
                                         </td>
                                         <td>
                                             <p class="text-sm font-weight-bold mb-0 text-left">
-                                                {{ $item->name }}
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p class="text-sm font-weight-bold mb-0 text-left">
                                                 {{ $item->email }}
-                                            </p>
-                                        </td>
-                                        <td>
-                                            @if ($item->phone != '')
-                                                <p class="text-sm font-weight-bold mb-0 text-left">
-                                                    {{ $item->phone }}
-                                                </p>
-                                            @else
-                                                <p class="text-sm font-weight-bold mb-0 text-left">
-                                                    -
-                                                </p>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <p class="text-sm font-weight-bold mb-0 text-left">
-                                                {{ $item->address }}
                                             </p>
                                         </td>
                                         <td>
@@ -133,17 +98,21 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <form action="/users-banned/{{ $item->email }}" method="POST"
-                                                class="d-inline">
-                                                @method('delete')
+                                            {{-- approve user --}}
+                                            <form action="/users-approved/{{ $item->email }}" method="post">
                                                 @csrf
-                                                <button
-                                                    class="btn btn-link text-danger text-gradient px-3 mb-0 dropdown-item"
-                                                    onclick="return confirm('Apakah anda yakin banned {{ $item->name }} ?')">
-                                                    <i class="far fa-trash-alt me-2"></i>
-                                                    Banned
+                                                @method('PUT')
+                                                <button class="btn btn-link text-dark text-gradient px-3 mb-0"
+                                                    onclick="return confirm('Apakah anda yakin mengaktifkan {{ $item->email }} ?')">
+                                                    <i class="fas fa-pencil-alt me-2"></i>
+                                                    Aprrove
                                                 </button>
                                             </form>
+                                            {{-- approve user --}}
+                                            {{-- <a class="btn btn-link text-dark text-gradient px-3 mb-0" href="#">
+                                                <i class="fas fa-pencil-alt me-2"></i>
+                                                Approve
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @empty
