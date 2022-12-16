@@ -26,7 +26,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'book_code' => 'required|unique:books|max:50',
+            // 'book_code' => 'required|unique:books|max:50',
             'title' => 'required | max:100',
         ]);
 
@@ -38,6 +38,7 @@ class BookController extends Controller
             $request->file('image')->storeAs('cover', $newName);
         }
         $request['cover'] = $newName;
+        $request['book_code'] = 'SR-' . mt_rand(000,999);
 
         $createBook = Book::create($request->all());
 

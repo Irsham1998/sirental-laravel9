@@ -107,9 +107,15 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <p class="text-sm font-weight-bold mb-0 text-left">
-                                                {{ $item->status }}
-                                            </p>
+                                            @if ($item->status == 'in stock')
+                                                <p class="text-sm font-weight-bold mb-0 text-left">
+                                                    {{ $item->status }}
+                                                </p>
+                                            @else
+                                                <p class="text-sm text-danger font-weight-bold mb-0 text-left">
+                                                    {{ $item->status }}
+                                                </p>
+                                            @endif
                                         </td>
                                         <td class="align-middle">
                                             <div class="dropdown">

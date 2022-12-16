@@ -52,24 +52,33 @@
                                         @csrf
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-md-6 mb-2">
+                                                {{-- <div class="col-md-6 mb-2">
                                                     <label for="book_code" class="form-label">Code</label>
                                                     <input type="text" class="form-control" id="book_code"
                                                         name="book_code" value="{{ old('book_code') }}" required>
-                                                </div>
-                                                <div class="col-12 col-md-6 mb-2">
+                                                </div> --}}
+                                                <div class="col-md-6 mb-2">
                                                     <label for="title" class="form-label">Title</label>
                                                     <input type="text" class="form-control" id="title" name="title"
                                                         value="{{ old('title') }}" required>
                                                 </div>
+                                                <div class=" col-md-6 mb-2">
+                                                    <label for="title" class="form-label">Category</label>
+                                                    <select name="categories[]" id="category"
+                                                        class="form-select js-example-basic-multiple" multiple="multiple">
+                                                        @foreach ($listCategory as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 mb-2">
+                                                <div class="col mb-2">
                                                     <label for="image" class="form-label">Cover Book</label>
                                                     <input type="file" class="form-control" id="image"
                                                         name="image">
                                                 </div>
-                                                <div class="col-12 col-md-6 mb-2 mt-1">
+                                                {{-- <div class="col-12 col-md-6 mb-2 mt-1">
                                                     <label for="title" class="form-label">Category</label>
                                                     <select name="categories[]" id="category"
                                                         class="form-control js-example-basic-multiple" multiple="multiple">
@@ -77,7 +86,7 @@
                                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                         @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-primary btn-md btn-block mb-0" type="submit">

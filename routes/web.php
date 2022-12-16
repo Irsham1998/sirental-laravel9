@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\OtentikasiController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RentlogController;
 use App\Http\Controllers\UserController;
@@ -64,5 +65,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rent-logs', [RentlogController::class, 'index'])->name('rent-logs')->middleware('admin');
 
     // client
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('client');
+    Route::get('/profile', [ClientController::class, 'profile'])->name('profile')->middleware('client');
+    Route::get('/books-list', [ClientController::class, 'bookList'])->name('book-list')->middleware('client');
 });

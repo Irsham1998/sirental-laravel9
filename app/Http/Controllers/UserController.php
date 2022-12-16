@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function profile()
-    {
-        return view('profile');
-    }
-
     public function index()
     {
         $userList = User::where('role_id', 2)->where('status', 'active')->get();
