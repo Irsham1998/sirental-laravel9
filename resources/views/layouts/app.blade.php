@@ -71,7 +71,7 @@
                         <a class="nav-link {{ request()->is('books') ? 'active' : '' }}" href="/books">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                                <i class="ni ni-favourite-28 text-warning text-sm opacity-10"></i>
                             </div>
                             <span class="nav-link-text ms-1">Books</span>
                         </a>
