@@ -4,29 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\RentLogs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
     public function profile()
     {
-        return view('profile');
+        $rentlistuser = RentLogs::where('user_id', Auth::user()->id)->get();
+        return view('profile',[
+            'rentlistuser' => $rentlistuser
+        ]);
     }
 
     public function bookList(Request $request)
     {
         $categories = Category::all();
-        // $title = $request->title;
-        // $cat = $request->category;
 
         $books = Book::with('categories')->get();
-        // if ($title || $cat) {
-        //     $books =Book::with(['categories'])->where('title', 'LIKE', "%{$title}%")
-        //             ->orWhereHas('categories', function($q) use($cat){
-        //                 $q->where('categories.id', $cat);
-        //                 })->get();
-        // }
 
         if ($request->title) {
             $books =Book::where('title', 'LIKE', '%'.$request->title.'%')

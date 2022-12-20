@@ -79,68 +79,108 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Username</label>
-                                <input class="form-control" type="text" value="lucky.jesse">
+                                <input class="form-control" type="text" value="{{ Auth::user()->name }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Email address</label>
-                                <input class="form-control" type="email" value="jesse@example.com">
+                                <input class="form-control" type="email" value="{{ Auth::user()->email }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">First name</label>
-                                <input class="form-control" type="text" value="Jesse">
+                                <label for="example-text-input" class="form-control-label">Phone</label>
+                                <input class="form-control" type="text" value="{{ Auth::user()->phone }}">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Last name</label>
-                                <input class="form-control" type="text" value="Lucky">
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="horizontal dark">
-                    <p class="text-uppercase text-sm">Contact Information</p>
-                    <div class="row">
-                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Address</label>
-                                <input class="form-control" type="text"
-                                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">City</label>
-                                <input class="form-control" type="text" value="New York">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Country</label>
-                                <input class="form-control" type="text" value="United States">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Postal code</label>
-                                <input class="form-control" type="text" value="437300">
+                                <input class="form-control" type="text" value="{{ Auth::user()->address }}">
                             </div>
                         </div>
                     </div>
                     <hr class="horizontal dark">
-                    <p class="text-uppercase text-sm">About me</p>
+                    <p class="text-uppercase text-sm">Rent Information</p>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">About me</label>
-                                <input class="form-control" type="text"
-                                    value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source.">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center justify-content-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 text-center">
+                                                #
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                                Book
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                                Rent Date
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                                Return Date
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($rentlistuser as $item)
+                                            <tr>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0 text-center">
+                                                        {{ $loop->iteration }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0 text-left">
+                                                        {{ $item->book->title }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0 text-left">
+                                                        {{ $item->rent_date }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0 text-left">
+                                                        {{ $item->return_date }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0 text-left">
+                                                        @if ($item->actual_return_date == null)
+                                                            <span class="badge text-bg-primary">Sedang dipinjam</span>
+                                                        @elseif($item->return_date < $item->actual_return_date)
+                                                            <span class="badge text-bg-danger">Terlambat</span>
+                                                        @elseif($item->actual_return_date <= $item->return_date)
+                                                            <span class="badge text-bg-success">Sudah dikembalikan</span>
+                                                        @endif
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5">
+                                                    <p class="text-sm font-weight-bold mb-0 text-center">
+                                                        Belum meminjam
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                    <hr class="horizontal dark">
                 </div>
             </div>
         </div>
