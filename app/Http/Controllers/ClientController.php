@@ -22,7 +22,7 @@ class ClientController extends Controller
 
         $books = Book::with('categories')->get();
         // if ($title || $cat) {
-        //     $books =Book::with(['categories','cats'])->where('title', 'LIKE', "%{$title}%")
+        //     $books =Book::with(['categories'])->where('title', 'LIKE', "%{$title}%")
         //             ->orWhereHas('categories', function($q) use($cat){
         //                 $q->where('categories.id', $cat);
         //                 })->get();

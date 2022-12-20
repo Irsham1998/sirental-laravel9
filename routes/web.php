@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\OtentikasiController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookRentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
@@ -60,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/users-banned/{email}', [UserController::class, 'banned'])->name('users-banned')->middleware('admin');
     Route::get('/users-bannedlist', [UserController::class, 'bannedlist'])->name('users-bannedlist')->middleware('admin');
     Route::get('/users-restore/{email}', [UserController::class, 'restore'])->name('users-restore')->middleware('admin');
+
+    // admin book rent
+    Route::get('/book-rent', [BookRentController::class, 'index'])->name('book-rent')->middleware('admin');
+    Route::post('/book-rent-add', [BookRentController::class, 'store'])->name('book-rent-store')->middleware('admin');
 
     // admin rent logs
     Route::get('/rent-logs', [RentlogController::class, 'index'])->name('rent-logs')->middleware('admin');
